@@ -1,3 +1,5 @@
+import { Facilities } from "./Facilities.js"
+import { Governors } from "./Governors.js"
 
 
 
@@ -9,8 +11,10 @@ export const Exomine = () => {
     <div class="topContainer">
         <div id="dropdownChoices">
             <article class="govChoice">
+                ${Governors()}
             </article>
             <article class="facilityChoice">
+                ${Facilities()}
             </article>
         </div>
         <article class="colonyMinerals">
