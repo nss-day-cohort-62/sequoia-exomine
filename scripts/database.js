@@ -34,11 +34,19 @@ const database = {
             mineralId: 4
         }
     ],
-    spaceCart: {}
+    spaceCart: {
+    
+    }
 }
 
+
+//set functions for accessing various database objects
 export const getGovernors = () => {
     return database.governors.map(g => ({...g}))
+}
+
+export const getGovernorId = () => {
+    return database.spaceCart.governorId
 }
 
 export const getColonies = () => {
@@ -57,13 +65,42 @@ export const getColonyMinerals = () => {
     return database.colonyMinerals.map(cm => ({...cm}))
 }
 
-//BELOW IS STARTER CODE
-
-
-export const setFacility = (facilityId) => {
-    database.spaceCart.selectedFacility = facilityId
+//set Functions for temporary state
+export const setGovernor = (id) => {
+    database.spaceCart.governorId = id
     document.dispatchEvent( new CustomEvent("stateChanged") )
 }
+
+export const setFacility = (id) => {
+    database.spaceCart.facilityId = id
+    document.dispatchEvent( new CustomEvent("stateChanged") )
+}
+
+export const setColony = (id) => {
+    database.spaceCart.colonyId = id
+    document.dispatchEvent( new CustomEvent("stateChanged") )
+}
+
+export const setMineral = (id) => {
+    database.spaceCart.mineralId = id
+    document.dispatchEvent( new CustomEvent("stateChanged") )
+}
+
+export const isGovernorSelected = (id) => {
+    if (database.spaceCart.governorId === id){
+        return `selected`
+    } else {
+        return ""
+    }
+}
+
+
+//BELOW IS STARTER CODE
+
+// export const setFacility = (facilityId) => {
+//     database.spaceCart.selectedFacility = facilityId
+//     document.dispatchEvent( new CustomEvent("stateChanged") )
+// }
 
 
 export const purchaseMineral = () => {
