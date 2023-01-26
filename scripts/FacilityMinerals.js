@@ -1,18 +1,38 @@
-import {getMinerals, getFacilities} from "./database.js" 
+import {getMinerals, getFacilities, getFacilityId, setMineral, isMineralSelected} from "./database.js" 
 
-const minerals = getMinerals()
-const facilities = getFacilities()
+document.addEventListener(
+    "change", (event) => {
+    if (event.target.name === "mineral") {
+        setMineral(parseInt(event.target.value))
+    }
+})
 
-//I'll be back!!!
-// export const Minerals = () => {
-//     let html = "<h2>Minerals</h2>"
-//     html += `<li>${matchedFacility(mineral)}</li>`
 
-// }
+export const Minerals = () => {
+    const minerals = getMinerals()
+    const facilities = getFacilities()
+    const facilityId = getFacilityId()
+    let html = "<h2>Minerals</h2>"
+    html += "<ul>"
+
+    if (facilityId) {
+        const foundFacility = facilities.find(facility => facilityId === facility.id)
+        const foundMinerals = minerals.filter(mineral => foundFacility.id === mineral.facilityId)
+        const listMinerals = foundMinerals.map(foundMineral => {
+            return `<li>
+            <input type="radio" name="mineral" ${isMineralSelected(foundMineral.id)} value="${foundMineral.id}" /> ${foundMineral.type}</li>`
+        })
+        html += listMinerals.join("")
+    }
+    html += "</ul>"
+    return html
+}
+
+
 
 // const matchedFacility = (mineral, facilities) =>{
 //     let facilityMatch = ""
 //     facilityMatch = facilities.find(facility => facility.id === mineral.facilityId){
 //     }
 //     return facilityMatch.mine
-// }
+//}

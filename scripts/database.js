@@ -57,6 +57,10 @@ export const getFacilities = () => {
     return database.facilities.map(f => ({...f}))
 }
 
+export const getFacilityId = () => {
+    return database.spaceCart.facilityId
+}
+
 export const getMinerals = () => {
     return database.minerals.map(m => ({...m}))
 }
@@ -94,6 +98,31 @@ export const isGovernorSelected = (id) => {
     }
 }
 
+export const isFacilitySelected = (id) => {
+    if (database.spaceCart.facilityId === id){
+        return `selected`
+    } else {
+        return ""
+    }
+} 
+
+
+export const isMineralSelected = (id) => {
+    if (database.spaceCart.mineralId === id) {
+        return 'checked'
+    } else {
+        return ""
+    }
+}
+
+
+export const isFacilityDisabled = () => {
+    if (database.spaceCart.governorId) {
+        return ""
+    } else {
+       return `disabled`
+    }
+}
 
 //BELOW IS STARTER CODE
 
