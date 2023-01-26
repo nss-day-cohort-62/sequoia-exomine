@@ -1,27 +1,25 @@
-import { getGovernorId, getColonies, getGovernors} from "./database.js";
+import { getGovernorId, getColonies, getGovernors, setColony} from "./database.js";
 
-const governors = getGovernors()
+
 
 export const Colonies = () => {
+    const governors = getGovernors()
     const gov = getGovernorId()
     const colonies = getColonies()
-    //console.log(gov)
     let html = ""
-    let govColony = null
-    //use the governor id to iterate through governor objects, finding the appropriate colony id
-    //use the found colony id to access appropriate colony object
-    //use that to print out colony name
-    for (const governor of governors) {
-        if (gov === governor.id) {
-        govColony = governor.colonyId  
-    }}
-    for (const colony of colonies){
-            if (govColony === colony.id ){
-                return html += `<h2>${colony.location} Minerals</h2>`
-            } 
-            else {
-                return html += "<h2>Colony Minerals</h2>"
-            }
-        }
-        return html
+    /*
+    Conditional Rendering. Because the page is loading all at once, colonyId 
+    doesn't exist yet. So need a ? to say "if this exists, access this property"
+    alt "if, and if not, when" used in .find making object?.property
+    */
+    if (gov) {
+        const foundGov = governors.find(governor => gov === governor.id)
+        const foundColony = colonies.find(colony => foundGov.colonyId === colony.id)
+            setColony(foundColony.id)
+        html += `<h2>${foundColony.location} Minerals</h2>`
+        
+    } else {
+        return html += "<h2>Colony Minerals</h2>"
+    }
+return html
 }
