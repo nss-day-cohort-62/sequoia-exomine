@@ -1,19 +1,16 @@
-import { getColonyMinerals } from "./database.js"
-
-
+import { getMineralId, getMinerals } from "./database.js";
 
 
 export const SpaceCart = () => {
-    const minerals = getColonyMinerals()
+    const mineralId = getMineralId()
+    const minerals = getMinerals()
+    let html = "<h2>Space Cart</h2>"
+    const chosenMineral = minerals.find(mineral => mineralId === mineral.id)
 
-    let html = "<ul>"
-
-    const listItems = minerals.map((mineral) => {
-        return `<li>${mineral.mineralId}</li>`
-    })
-
-    html += listItems.join("")
-    html += "</ul>"
-
+    if (chosenMineral) {
+    html+= `<p>1 ton of ${chosenMineral.type}</p>`
+    } else {
+        html+= ""
+    }
     return html
 }
