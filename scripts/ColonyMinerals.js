@@ -15,6 +15,7 @@ export const Colonies = () => {
     if (gov) {
         const foundGov = governors.find(governor => gov === governor.id)
         const foundColony = colonies.find(colony => foundGov.colonyId === colony.id)
+        //This caused our call stack error, because it is not a change event
             setColony(foundColony.id)
         html += `<h2>${foundColony.location} Minerals</h2>`
         

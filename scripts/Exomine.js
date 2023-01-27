@@ -3,6 +3,9 @@ import { Governors } from "./Governors.js"
 import { Colonies } from "./ColonyMinerals.js"
 import { Minerals } from "./FacilityMinerals.js"
 
+
+
+
 export const Exomine = () => {
     return `
     <header class="header">

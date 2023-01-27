@@ -72,22 +72,22 @@ export const getColonyMinerals = () => {
 //set Functions for temporary state
 export const setGovernor = (id) => {
     database.spaceCart.governorId = id
-    document.dispatchEvent( new CustomEvent("stateChanged") )
+    document.dispatchEvent( new CustomEvent("stateChanged"))
 }
 
 export const setFacility = (id) => {
     database.spaceCart.facilityId = id
-    document.dispatchEvent( new CustomEvent("stateChanged") )
+    document.dispatchEvent( new CustomEvent("stateChanged"))
 }
 
 export const setColony = (id) => {
     database.spaceCart.colonyId = id
-    document.dispatchEvent( new CustomEvent("stateChanged") )
+    //removed customEvent because no re-rendering is needed
 }
 
 export const setMineral = (id) => {
     database.spaceCart.mineralId = id
-    document.dispatchEvent( new CustomEvent("stateChanged") )
+    document.dispatchEvent( new CustomEvent("stateChanged"))
 }
 
 export const isGovernorSelected = (id) => {
