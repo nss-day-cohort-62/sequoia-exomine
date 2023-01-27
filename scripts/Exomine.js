@@ -2,6 +2,24 @@ import { Facilities } from "./Facilities.js"
 import { Governors } from "./Governors.js"
 import { Colonies } from "./ColonyMinerals.js"
 import { Minerals } from "./FacilityMinerals.js"
+import { addMineralsToColony } from "./database.js"
+import { SpaceCart } from "./SpaceCart.js"
+
+
+
+
+
+document.addEventListener(
+    "click",
+    (event) => {
+        if (event.target.id === "buy") {
+            addMineralsToColony()
+        }
+    }
+)
+
+
+
 
 
 
@@ -22,6 +40,7 @@ export const Exomine = () => {
         </div>
         <article class="colonyMinerals">
                  ${Colonies()}
+                 ${SpaceCart()}
         </article>
     </div>
     <div class="bottomContainer">
