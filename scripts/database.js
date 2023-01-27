@@ -28,11 +28,7 @@ const database = {
         {id: 5, type: "Meteors", facilityId: 1, inventory: 100},
     ],
     colonyMinerals: [
-        {
-            id: 1,
-            colonyId: 2,
-            mineralId: 4
-        }
+
     ],
     spaceCart: {
     
@@ -68,6 +64,12 @@ export const getMinerals = () => {
 export const getColonyMinerals = () => {
     return database.colonyMinerals.map(cm => ({...cm}))
 }
+ 
+
+
+
+
+
 
 //set Functions for temporary state
 export const setGovernor = (id) => {
@@ -89,6 +91,13 @@ export const setMineral = (id) => {
     database.spaceCart.mineralId = id
     document.dispatchEvent( new CustomEvent("stateChanged"))
 }
+
+
+
+
+
+
+
 
 export const isGovernorSelected = (id) => {
     if (database.spaceCart.governorId === id){
@@ -124,6 +133,15 @@ export const isFacilityDisabled = () => {
     }
 }
 
+
+
+
+
+
+
+
+
+
 //BELOW IS STARTER CODE
 
 // export const setFacility = (facilityId) => {
@@ -137,5 +155,32 @@ export const purchaseMineral = () => {
     // Broadcast custom event to entire documement so that the
     // application can re-render and update state
     document.dispatchEvent( new CustomEvent("stateChanged") )
+}
+
+
+export const addMineralsToColony = () => {
+    const addMineral = {...database.spaceCart}
+
+    addMineral.id = database.colonyMinerals.length + 1
+
+    addMineral.timestamp = Date.now()
+    
+    changeMineralInventory(addMineral)
+
+    database.colonyMinerals.push(addMineral)
+
+    database.spaceCart = {}
+
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
+
+
+
+const changeMineralInventory = (addMineral) => {
+    const mineralMatch = database.minerals.find(mineral =>
+        addMineral.mineralId === mineral.id) 
+        mineralMatch.inventory = mineralMatch.inventory - 1
+        document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 

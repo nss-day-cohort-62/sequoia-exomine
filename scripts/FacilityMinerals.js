@@ -13,14 +13,14 @@ export const Minerals = () => {
     const facilities = getFacilities()
     const facilityId = getFacilityId()
     let html = "<h2>Minerals</h2>"
-    html += "<ul>"
+    html += "<ul class='selectMineral'>"
 
     if (facilityId) {
         const foundFacility = facilities.find(facility => facilityId === facility.id)
         const foundMinerals = minerals.filter(mineral => foundFacility.id === mineral.facilityId)
         const listMinerals = foundMinerals.map(foundMineral => {
             return `<li>
-            <input type="radio" name="mineral" ${isMineralSelected(foundMineral.id)} value="${foundMineral.id}" /> ${foundMineral.type}</li>`
+            <input type="radio" name="mineral" ${isMineralSelected(foundMineral.id)} value="${foundMineral.id}" />${foundMineral.inventory} tons of ${foundMineral.type}</li>`
         })
         html += listMinerals.join("")
     }
