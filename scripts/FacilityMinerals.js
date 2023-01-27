@@ -29,7 +29,6 @@ export const Minerals = () => {
 }
 
 
-
 // const matchedFacility = (mineral, facilities) =>{
 //     let facilityMatch = ""
 //     facilityMatch = facilities.find(facility => facility.id === mineral.facilityId){

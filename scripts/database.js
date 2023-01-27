@@ -8,12 +8,12 @@ const database = {
         { id: 6, name: "Darth Vader", colonyId: 6, activeStatus: true }
     ],
     colonies: [
-        { id: 1, location: "Arakis", governorId: 1},
-        { id: 2, location: "Death Star", governorId: 2},
-        { id: 3, location: "Vulcan", governorId: 3},
-        { id: 4, location: "Pandora", governorId: 4},
-        { id: 5, location: "Polaris", governorId: 5},
-        { id: 6, location: "Moon", governorId: 6}
+        { id: 1, location: "Arakis", governorId: 1 },
+        { id: 2, location: "Death Star", governorId: 2 },
+        { id: 3, location: "Vulcan", governorId: 3 },
+        { id: 4, location: "Pandora", governorId: 4 },
+        { id: 5, location: "Polaris", governorId: 5 },
+        { id: 6, location: "Moon", governorId: 6 }
     ],
     facilities: [
         { id: 1, mine: "Io", activeStatus: true },
@@ -21,7 +21,7 @@ const database = {
         { id: 3, mine: "Ganymede", activeStatus: true }
     ],
     minerals: [
-        {id: 1, type: "Spice", facilityId: 1, inventory: 20},
+        {id: 1, type: "Spice", facilityId: 1, inventory: 50},
         {id: 2, type: "Delithium Crystals", facilityId: 3, inventory: 50},
         {id: 3, type: "Gold pressed Latinum", facilityId: 3, inventory: 15},
         {id: 4, type: "Latikia", facilityId: 2, inventory: 19},
@@ -59,6 +59,10 @@ export const getFacilityId = () => {
 
 export const getMinerals = () => {
     return database.minerals.map(m => ({...m}))
+}
+
+export const getMineralId = () => {
+    return database.spaceCart.mineralId
 }
 
 export const getColonyMinerals = () => {
@@ -100,7 +104,10 @@ export const setMineral = (id) => {
 
 
 export const isGovernorSelected = (id) => {
-    if (database.spaceCart.governorId === id){
+    const purchases = getColonyMinerals()
+    if (purchases.find(purchase => purchase.governorId === id)) {
+    return `selected`
+    } else if (database.spaceCart.governorId === id) {
         return `selected`
     } else {
         return ""
@@ -108,7 +115,10 @@ export const isGovernorSelected = (id) => {
 }
 
 export const isFacilitySelected = (id) => {
-    if (database.spaceCart.facilityId === id){
+    const purchases = getColonyMinerals()
+    if (purchases.find(purchase => purchase.facilityId === id)) {
+        return `selected`
+    } else if (database.spaceCart.facilityId === id) {
         return `selected`
     } else {
         return ""
@@ -126,36 +136,17 @@ export const isMineralSelected = (id) => {
 
 
 export const isFacilityDisabled = () => {
-    if (database.spaceCart.governorId) {
+    const purchases = getColonyMinerals()
+    if (purchases.length >= 1 ) {
+        return ""
+
+    } else if (database.spaceCart.governorId) {
         return ""
     } else {
        return `disabled`
     }
 }
 
-
-
-
-
-
-
-
-
-
-//BELOW IS STARTER CODE
-
-// export const setFacility = (facilityId) => {
-//     database.spaceCart.selectedFacility = facilityId
-//     document.dispatchEvent( new CustomEvent("stateChanged") )
-// }
-
-
-export const purchaseMineral = () => {
-
-    // Broadcast custom event to entire documement so that the
-    // application can re-render and update state
-    document.dispatchEvent( new CustomEvent("stateChanged") )
-}
 
 
 export const addMineralsToColony = () => {
@@ -165,8 +156,8 @@ export const addMineralsToColony = () => {
 
     addMineral.timestamp = Date.now()
     
-    changeMineralInventory(addMineral)
-
+    decrementMineralInventory(addMineral)
+    
     database.colonyMinerals.push(addMineral)
 
     database.spaceCart = {}
@@ -174,10 +165,17 @@ export const addMineralsToColony = () => {
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
+/*
+const addColonyInventory = (addMineral) => {
+    const mineralMatch = database.colonies.mineralInventory.find(mineral =>
+        addMineral.mineralId === mineral.mineralId)
+        mineralMatch.inventory = mineralMatch.inventory + 1
+        console.log(mineralMatch.inventory)
 
+}
+*/
 
-
-const changeMineralInventory = (addMineral) => {
+const decrementMineralInventory = (addMineral) => {
     const mineralMatch = database.minerals.find(mineral =>
         addMineral.mineralId === mineral.id) 
         mineralMatch.inventory = mineralMatch.inventory - 1
