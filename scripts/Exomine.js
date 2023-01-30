@@ -3,7 +3,6 @@ import { Governors } from "./Governors.js"
 import { Colonies } from "./ColonyMinerals.js"
 import { Minerals } from "./FacilityMinerals.js"
 import { addMineralsToColony } from "./database.js"
-import { PurchasedMinerals } from "./PurchasedMinerals.js"
 import { SpaceCart } from "./SpaceCart.js"
 
 
@@ -41,7 +40,6 @@ export const Exomine = () => {
         </div>
         <article class="colonyMinerals">
                  ${Colonies()}
-                 ${PurchasedMinerals()}
         </article>
     </div>
     <div class="bottomContainer">
@@ -49,7 +47,7 @@ export const Exomine = () => {
             ${Minerals()}
         </article>
         <article class="spaceCart">
-        ${SpaceCart()}
+              ${SpaceCart()}
         <button type="button" id="buy">Purchase Mineral</button>
         </article>
     </div>
