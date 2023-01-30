@@ -1,0 +1,42 @@
+.topContainer {
+    display: flex;
+    justify-content: space-evenly;
+    height: 230px;
+    margin: 10px 25px 30px 25px; 
+}
+
+.bottomContainer {
+    display: flex;
+    justify-content: space-evenly;
+    height: 250px;
+}
+
+
+
+.govChoice {
+    border: 1px solid green;
+    height: 100px;
+    margin: 5px 0px 20px 0px;
+    padding: 0 25px;
+}
+
+.facilityChoice {
+    border: 1px solid purple;
+    height: 100px;
+    padding: 0 25px;
+}
+
+.colonyMinerals {
+    border: 1px solid orange;
+    padding: 0 25px; 
+}
+
+.mineralChoices {
+    border: 1px solid black;
+    padding: 0 25px;
+}
+
+.spaceCart {
+    border: 1px solid pink;
+    text-align: center;
+}
