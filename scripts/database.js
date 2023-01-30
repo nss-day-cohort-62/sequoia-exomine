@@ -28,6 +28,7 @@ const database = {
         {id: 5, type: "Meteors", facilityId: 1, inventory: 100},
     ],
     colonyMinerals: [
+        // {id: 1, colonyId: 3, governorId: 1, mineralId: 4, timestamp: 0980345897397}
 
     ],
     spaceCart: {
@@ -107,7 +108,8 @@ export const isGovernorSelected = (id) => {
     const purchases = getColonyMinerals()
     if (purchases.find(purchase => purchase.governorId === id)) {
     return `selected`
-    } else if (database.spaceCart.governorId === id) {
+    } else 
+    if (database.spaceCart.governorId === id) {
         return `selected`
     } else {
         return ""
