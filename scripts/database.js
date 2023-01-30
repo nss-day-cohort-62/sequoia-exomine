@@ -154,13 +154,21 @@ export const isFacilityDisabled = () => {
 export const addMineralsToColony = () => {
     const addMineral = {...database.spaceCart}
 
+    //will add an if statement to check if an object that matches the colonyId && mineralId
+    //if so, then just add + 1 to a property "inventory"
+        const mineralsInColony = database.colonyMinerals.filter(colony => addMineral.colonyId === colony.colonyId) 
+        const matchedMineralinColony = mineralsInColony.find(mineral => addMineral.mineralId === mineral.mineralId)
+    if (matchedMineralinColony) {
+        matchedMineralinColony.inventory = matchedMineralinColony.inventory + 1
+    } else {
     addMineral.id = database.colonyMinerals.length + 1
 
-    addMineral.timestamp = Date.now()
-    
+    addMineral.inventory = 1
+
     decrementMineralInventory(addMineral)
     
     database.colonyMinerals.push(addMineral)
+    }
 
     database.spaceCart = {}
 

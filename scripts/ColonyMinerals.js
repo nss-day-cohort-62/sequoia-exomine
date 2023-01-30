@@ -21,9 +21,20 @@ export const Colonies = () => {
     if (gov) {
         const foundGov = governors.find(governor => gov === governor.id)
         const foundColony = colonies.find(colony => foundGov.colonyId === colony.id)
+        const purchasedMinerals = getColonyMinerals()
+        const matchedColonyMinerals = purchasedMinerals.filter(purchasedMineral => foundColony.id === purchasedMineral.colonyId)
+  
         //This caused our call stack error, because it is not a change event
             setColony(foundColony.id)
-        html += `<h2>${foundColony.location} Minerals</h2>`
+        html += `<h2>${foundColony.location} Minerals</h2>
+        <ul>
+        ${matchedColonyMinerals.map(
+        (purchase) => {
+            return matchPurchasedMinerals(purchase)
+        }
+         ).join("")}
+         </ul>
+        `
 
     } else if (lastGovId) {
         const foundGov = governors.find(governor => lastGovId === governor.id)
@@ -34,9 +45,9 @@ export const Colonies = () => {
         
         setColony(foundColony.id) 
         setGovernor(foundGov.id)
-        html += `<h2>${foundColony.location} Minerals</h2>`
-       
-        html += `<ul>
+        html += `<h2>${foundColony.location} Minerals</h2>
+        
+        <ul>
         ${matchedColonyMinerals.map(
         (purchase) => {
             return matchPurchasedMinerals(purchase)
@@ -60,8 +71,7 @@ const matchPurchasedMinerals = (purchase) => {
     const matchedMineral = minerals.find(mineral => mineral.id === purchase.mineralId)
     
     
-    //NEED TO SET COLONY AGAIN AFTER PURCHASE
-    return `<li> purchased 1 ton of ${matchedMineral.type}</li>`
+    return `<li> purchased ${purchase.inventory} ton(s) of ${matchedMineral.type}</li>`
 }
 
 // export const PurchasedMinerals = () => {
