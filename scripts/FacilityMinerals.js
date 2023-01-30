@@ -12,7 +12,7 @@ export const Minerals = () => {
     const minerals = getMinerals()
     const facilities = getFacilities()
     const facilityId = getFacilityId()
-    let html = "<h2>Minerals</h2>"
+    let html = "<h2>Minerals for Purchase</h2>"
     html += "<ul class='selectMineral'>"
 
     if (facilityId) {
