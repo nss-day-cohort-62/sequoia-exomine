@@ -99,28 +99,27 @@ export const setMineral = (id) => {
 
 
 
-
-
-
-
-
 export const isGovernorSelected = (id) => {
     const purchases = getColonyMinerals()
-    if (purchases.find(purchase => purchase.governorId === id)) {
-    return `selected`
-    } else 
     if (database.spaceCart.governorId === id) {
         return `selected`
+    } else if (purchases.find(purchase => purchase.governorId === id)) {
+    return `selected` 
     } else {
         return ""
     }
 }
 
+//BUG: when a gov is selected after initial purchase,
+//gov dropdown will not display any gov before, even though
+//technically you can select them
+
 export const isFacilitySelected = (id) => {
-    const purchases = getColonyMinerals()
-    if (purchases.find(purchase => purchase.facilityId === id)) {
-        return `selected`
-    } else if (database.spaceCart.facilityId === id) {
+    //No longer needed beginning part
+    //const purchases = getColonyMinerals()
+    // if (purchases.find(purchase => purchase.facilityId === id)) {
+    //     return `selected`
+    if (database.spaceCart.facilityId === id) {
         return `selected`
     } else {
         return ""
